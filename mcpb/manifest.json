@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "study-helper",
   "display_name": "考研复习助手 StudyHelper",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "管理考研复习助手的知识速记模块、学习时长统计、白名单设置与专注模式。",
   "long_description": "StudyHelper 是一个面向考研复习的桌面应用：受限浏览器 + 专注模式 + 右下角知识速记卡片 + 学习时长看板。本扩展通过 stdio 提供 MCP 工具，让 Agent 直接读写应用的数据目录：创建/编辑知识模块和条目（Markdown + LaTeX）、查看每日/每周学习时长、修改白名单（学习中自动锁定）以及开始一段专注学习。",
   "author": {

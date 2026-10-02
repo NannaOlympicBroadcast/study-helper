@@ -97,7 +97,7 @@ function renderFocus() {
     html += `<button id="btn-extend" class="small" title="修改结束时间">⏰ ${fmtTime(f.focusEndAt)} 结束</button>`;
   }
   p.innerHTML = html;
-  $('#btn-start')?.addEventListener('click', openStartDialog);
+  $('#btn-start')?.addEventListener('click', () => openStartDialog(false));
   $('#btn-rest')?.addEventListener('click', (e) => {
     e.stopPropagation();
     $('#rest-menu').classList.toggle('hidden');
@@ -129,7 +129,8 @@ function tickTimer() {
 }
 setInterval(tickTimer, 1000);
 
-function openStartDialog(extend = false) {
+function openStartDialog(extendArg = false) {
+  const extend = extendArg === true;
   const now = new Date();
   const def = new Date(extend && S.focus.focusEndAt ? S.focus.focusEndAt : now.getTime() + 2 * 3600000);
   const val = `${String(def.getHours()).padStart(2, '0')}:${String(def.getMinutes()).padStart(2, '0')}`;
