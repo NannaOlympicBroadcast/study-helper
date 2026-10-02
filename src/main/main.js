@@ -133,7 +133,15 @@ function createMainWindow() {
     },
   });
   mainWin.loadFile(path.join(RENDERER, 'index.html'));
+  // Focus mode keeps the window fullscreen: leaving fullscreen / minimizing / closing snaps back.
+  mainWin.on('leave-full-screen', () => focus && focus.mode === 'focus' && setTimeout(applyFocusFullscreen, 300));
+  mainWin.on('minimize', () => focus && focus.mode === 'focus' && setTimeout(applyFocusFullscreen, 300));
   mainWin.on('close', (e) => {
+    if (!quitting && focus && focus.mode === 'focus') {
+      e.preventDefault();
+      applyFocusFullscreen();
+      return;
+    }
     if (!quitting) {
       e.preventDefault();
       mainWin.hide();
@@ -145,6 +153,19 @@ function createMainWindow() {
       }
     }
   });
+}
+
+function applyFocusFullscreen() {
+  if (!mainWin || mainWin.isDestroyed()) return;
+  const on = focus.mode === 'focus';
+  if (on) {
+    if (!mainWin.isVisible()) mainWin.show();
+    if (mainWin.isMinimized()) mainWin.restore();
+    mainWin.setFullScreen(true);
+    mainWin.focus();
+  } else if (mainWin.isFullScreen()) {
+    mainWin.setFullScreen(false);
+  }
 }
 
 function showMain() {
@@ -552,6 +573,7 @@ app.whenReady().then(async () => {
   focus.on('change', (snap) => {
     broadcast('focus:state', snap);
     updateTray();
+    applyFocusFullscreen();
   });
   focus.on('session', () => sync.schedule(8000));
   focus.on('restOver', () => notify('休息结束', '回到专注模式，继续加油！'));
@@ -567,6 +589,7 @@ app.whenReady().then(async () => {
   updateTray();
 
   createMainWindow();
+  mainWin.once('ready-to-show', applyFocusFullscreen);
   watchData();
   setInterval(popupTick, 15000);
   setInterval(() => sync.syncNow().catch(() => {}), 10 * 60000);

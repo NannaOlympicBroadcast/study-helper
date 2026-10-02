@@ -9,7 +9,7 @@ const { z } = require('zod');
 const core = require('../src/shared/core');
 const { builtinModules } = require('../src/shared/builtin');
 
-const VERSION = '0.1.0';
+const VERSION = '0.1.1';
 const store = new core.DataStore();
 if (!store.knowledgeExists()) store.saveKnowledge(core.seedBuiltin({ modules: [] }, builtinModules()));
 
