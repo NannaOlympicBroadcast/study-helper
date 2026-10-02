@@ -1,0 +1,6 @@
+node_modules/
+dist/
+release/
+mcpb/server/
+*.mcpb
+assets/oauth.json

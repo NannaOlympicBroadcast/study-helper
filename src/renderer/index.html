@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: file:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self'" />
+  <title>考研复习助手</title>
+  <link rel="stylesheet" href="katex/katex.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header id="topbar">
+    <div class="brand">📚 考研复习助手</div>
+    <div id="focus-panel"></div>
+    <div id="sync-badge" title="云同步状态"></div>
+  </header>
+  <div id="layout">
+    <nav id="sidebar">
+      <button data-view="browser" class="active">🌐 浏览器</button>
+      <button data-view="files">📁 资料文件夹</button>
+      <button data-view="knowledge">🧠 知识库</button>
+      <button data-view="stats">📊 学习看板</button>
+      <button data-view="settings">⚙️ 设置</button>
+    </nav>
+    <main>
+      <section id="view-browser" class="view active">
+        <div class="toolbar">
+          <button id="nav-back" title="后退">←</button>
+          <button id="nav-fwd" title="前进">→</button>
+          <button id="nav-reload" title="刷新">⟳</button>
+          <button id="nav-home" title="主页">⌂</button>
+          <input id="address" placeholder="输入网址（仅允许白名单域名）" spellcheck="false" />
+          <button id="nav-go" class="primary">前往</button>
+        </div>
+        <div id="quick-links" class="chips"></div>
+        <div id="blocked-banner" class="banner warn hidden"></div>
+        <div class="web-wrap">
+          <webview id="web" partition="persist:browse" plugins src="about:blank"></webview>
+          <div id="web-empty" class="empty-hint">在上方输入网址，或点击白名单中的站点开始。<br/>只有在 <b>设置 → 允许的域名</b> 中配置过的站点（含所有子域名）才能打开。</div>
+        </div>
+      </section>
+
+      <section id="view-files" class="view">
+        <div class="split">
+          <div class="pane left">
+            <div class="pane-head"><select id="folder-root"></select></div>
+            <div id="breadcrumb" class="breadcrumb"></div>
+            <ul id="file-list" class="file-list"></ul>
+          </div>
+          <div class="pane right">
+            <div class="pane-head"><span id="preview-title">选择文件进行预览</span></div>
+            <div id="preview-md" class="markdown-body hidden"></div>
+            <pre id="preview-text" class="hidden"></pre>
+            <webview id="file-web" partition="persist:browse" plugins src="about:blank" class="hidden"></webview>
+            <div id="preview-empty" class="empty-hint">只能浏览 <b>设置 → 允许的文件夹</b> 中的内容。支持预览 PDF、图片、音视频、Markdown、文本和网页文件。</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-knowledge" class="view">
+        <div class="split">
+          <div class="pane left">
+            <div class="pane-head">
+              <b>知识模块</b>
+              <span class="spacer"></span>
+              <button id="mod-add" class="small primary">＋ 新建</button>
+            </div>
+            <ul id="module-list" class="module-list"></ul>
+            <div class="pane-foot">
+              <button id="kn-import" class="small">导入 JSON</button>
+              <button id="kn-export" class="small">导出 JSON</button>
+              <button id="kn-restore" class="small">恢复内置</button>
+            </div>
+          </div>
+          <div class="pane right">
+            <div class="pane-head">
+              <b id="mod-title">请选择模块</b>
+              <span class="spacer"></span>
+              <input id="entry-search" placeholder="搜索条目…" />
+              <button id="mod-edit" class="small">编辑模块</button>
+              <button id="entry-add" class="small primary">＋ 添加条目</button>
+              <button id="popup-test" class="small">弹一张试试</button>
+            </div>
+            <div id="entry-list" class="entry-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-stats" class="view">
+        <div class="stats-wrap">
+          <div class="cards" id="today-cards"></div>
+          <div class="card">
+            <div class="row">
+              <button id="week-prev" class="small">‹ 上一周</button>
+              <b id="week-label" class="grow center"></b>
+              <button id="week-next" class="small">下一周 ›</button>
+            </div>
+            <div id="week-chart"></div>
+            <div class="legend"><span class="lg focus"></span>专注 <span class="lg research"></span>查资料/网课 <span class="lg rest"></span>休息 <span class="lg goal"></span>每日目标</div>
+          </div>
+          <div class="card">
+            <b>今日记录</b>
+            <ul id="session-list" class="session-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-settings" class="view">
+        <div id="lock-banner" class="banner warn hidden">🔒 学习中，配置已锁定。结束学习后才能修改白名单和其他设置。</div>
+        <div class="settings-grid">
+          <div class="card">
+            <h3>允许的域名</h3>
+            <p class="muted">每行一个域名后缀。例如填写 <code>snh48ssr.com</code>，则 <code>snh48ssr.com</code> 及 <code>*.snh48ssr.com</code> 都可访问。</p>
+            <textarea id="set-domains" rows="8" spellcheck="false"></textarea>
+            <label>浏览器主页 <input id="set-homepage" placeholder="https://..." /></label>
+          </div>
+          <div class="card">
+            <h3>允许的文件夹</h3>
+            <p class="muted">只能打开和预览这些文件夹（含子文件夹）里的内容。</p>
+            <ul id="set-folders" class="folder-list"></ul>
+            <button id="set-folder-add" class="small">＋ 添加文件夹</button>
+          </div>
+          <div class="card">
+            <h3>网络</h3>
+            <label>代理模式 <select id="set-proxy-mode"><option value="system">使用系统代理</option><option value="custom">自定义代理</option><option value="direct">不使用代理</option></select></label>
+            <label>自定义代理地址 <input id="set-proxy-url" placeholder="http://127.0.0.1:7890" spellcheck="false" /></label>
+            <p class="muted">系统代理读取 Windows「设置 → 网络 → 代理」。如果代理软件没有开启“系统代理”，请选择自定义代理并填写地址。GitHub 同步也走这里的代理。</p>
+          </div>
+          <div class="card">
+            <h3>知识速记卡片</h3>
+            <label class="check"><input type="checkbox" id="set-popup" /> 非专注时在右下角弹出知识卡片</label>
+            <label>空闲 / 查资料时每隔（分钟） <input type="number" id="set-pi-idle" min="1" max="240" /></label>
+            <label>休息时每隔（分钟） <input type="number" id="set-pi-rest" min="1" max="60" /></label>
+            <label>卡片停留（秒，0 表示不自动关闭） <input type="number" id="set-pdur" min="0" max="600" /></label>
+            <div class="muted">参与弹出的模块：</div>
+            <div id="set-popup-mods" class="chips"></div>
+          </div>
+          <div class="card">
+            <h3>学习目标</h3>
+            <label>每日学习目标（分钟） <input type="number" id="set-goal" min="0" max="1440" /></label>
+          </div>
+          <div class="card" id="sync-card">
+            <h3>云同步（GitHub Gists）</h3>
+            <div id="sync-info"></div>
+            <div class="row wrap">
+              <button id="sync-device" class="small primary">GitHub 授权登录</button>
+              <button id="sync-token-btn" class="small">使用 Token 登录</button>
+              <button id="sync-now" class="small">立即同步</button>
+              <button id="sync-logout" class="small danger">退出登录</button>
+            </div>
+            <div id="device-box" class="banner info hidden"></div>
+            <details>
+              <summary class="muted">高级：OAuth App Client ID</summary>
+              <p class="muted">设备授权需要一个启用了 Device Flow 的 GitHub OAuth App。也可以用只勾选 <code>gist</code> 权限的 Personal Access Token 登录。</p>
+              <input id="set-clientid" placeholder="Iv1.xxxxxxxx 或 Ov23..." spellcheck="false" />
+            </details>
+          </div>
+        </div>
+        <div class="row end"><span id="data-dir" class="muted grow"></span><button id="set-save" class="primary">保存设置</button></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden"><div class="modal-box" id="modal-box"></div></div>
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>

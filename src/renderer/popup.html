@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self'" />
+  <title>知识速记</title>
+  <link rel="stylesheet" href="katex/katex.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="popup">
+  <div class="popup-card" id="card">
+    <div class="popup-head">
+      <span class="mod" id="p-mod"></span>
+      <span class="title" id="p-title"></span>
+      <button id="p-pin" title="固定（不自动关闭）">📌</button>
+      <button id="p-close" title="关闭">✕</button>
+    </div>
+    <div class="popup-body markdown-body" id="p-body"></div>
+    <div class="popup-foot">
+      <div class="bar"><div id="p-bar"></div></div>
+      <button class="small" id="p-next">换一条 ›</button>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
