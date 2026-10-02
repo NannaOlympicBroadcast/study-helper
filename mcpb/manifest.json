@@ -1,0 +1,116 @@
+{
+  "manifest_version": "0.3",
+  "name": "study-helper",
+  "display_name": "考研复习助手 StudyHelper",
+  "version": "0.1.0",
+  "description": "管理考研复习助手的知识速记模块、学习时长统计、白名单设置与专注模式。",
+  "long_description": "StudyHelper 是一个面向考研复习的桌面应用：受限浏览器 + 专注模式 + 右下角知识速记卡片 + 学习时长看板。本扩展通过 stdio 提供 MCP 工具，让 Agent 直接读写应用的数据目录：创建/编辑知识模块和条目（Markdown + LaTeX）、查看每日/每周学习时长、修改白名单（学习中自动锁定）以及开始一段专注学习。",
+  "author": {
+    "name": "NannaOlympicBroadcast",
+    "url": "https://github.com/NannaOlympicBroadcast"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NannaOlympicBroadcast/study-helper"
+  },
+  "homepage": "https://github.com/NannaOlympicBroadcast/study-helper",
+  "icon": "icon.png",
+  "license": "MIT",
+  "keywords": [
+    "study",
+    "kaoyan",
+    "flashcards",
+    "focus",
+    "考研"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/index.js"
+      ],
+      "env": {
+        "STUDY_HELPER_DATA_DIR": "${user_config.data_dir}"
+      }
+    }
+  },
+  "user_config": {
+    "data_dir": {
+      "type": "directory",
+      "title": "数据目录（可选）",
+      "description": "StudyHelper 的数据目录。留空则使用默认位置（Windows：%APPDATA%\\StudyHelper\\data）。",
+      "required": false,
+      "default": ""
+    }
+  },
+  "tools": [
+    {
+      "name": "get_status",
+      "description": "查看当前学习模式、结束时间和知识库概况"
+    },
+    {
+      "name": "list_modules",
+      "description": "列出所有知识模块"
+    },
+    {
+      "name": "get_module",
+      "description": "查看模块及其全部条目"
+    },
+    {
+      "name": "create_module",
+      "description": "新建知识模块（可附带条目）"
+    },
+    {
+      "name": "update_module",
+      "description": "修改模块名称、描述或是否参与弹窗"
+    },
+    {
+      "name": "delete_module",
+      "description": "删除知识模块"
+    },
+    {
+      "name": "add_entries",
+      "description": "向模块批量添加 Markdown/LaTeX 知识条目"
+    },
+    {
+      "name": "update_entry",
+      "description": "修改知识条目"
+    },
+    {
+      "name": "delete_entry",
+      "description": "删除知识条目"
+    },
+    {
+      "name": "search_entries",
+      "description": "搜索知识条目"
+    },
+    {
+      "name": "get_study_stats",
+      "description": "查看今日或某周的学习时长"
+    },
+    {
+      "name": "get_settings",
+      "description": "查看白名单、文件夹、代理和弹窗设置"
+    },
+    {
+      "name": "update_settings",
+      "description": "修改设置（学习中锁定）"
+    },
+    {
+      "name": "start_focus",
+      "description": "开始一段专注学习"
+    }
+  ],
+  "compatibility": {
+    "platforms": [
+      "win32",
+      "darwin",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}

@@ -11,7 +11,7 @@
     "build:renderer": "node scripts/build-renderer.mjs",
     "build:mcp": "node scripts/build-mcp.mjs",
     "start": "npm run build:renderer && electron .",
-    "test": "node --test test/core.test.js",
+    "test": "npm run build:mcp && node --test test/core.test.js test/mcp.test.js",
     "dist:win": "npm run build:renderer && electron-builder --win --publish never",
     "pack:mcpb": "npm run build:mcp && node scripts/pack-mcpb.mjs"
   },
@@ -58,12 +58,10 @@
     "@anthropic-ai/mcpb": "^2.1.2",
     "electron": "^44.5.1",
     "electron-builder": "^26.15.3",
-    "esbuild": "^0.28.2"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.31.0",
-    "katex": "^0.19.0",
+    "esbuild": "^0.28.2",
     "marked": "^18.0.14",
+    "katex": "^0.19.0",
+    "@modelcontextprotocol/sdk": "^1.31.0",
     "zod": "^4.6.5"
   }
 }
