@@ -4,3 +4,4 @@ release/
 mcpb/server/
 *.mcpb
 assets/oauth.json
+knowledge-src/

@@ -1,0 +1,24 @@
+{
+  "id": "builtin_integrals",
+  "name": "积分表",
+  "description": "常用不定积分公式（来自 integral-table-yanyansweetie-20260724.netlify.app）",
+  "source": "https://integral-table-yanyansweetie-20260724.netlify.app",
+  "entries": [
+    {"title": "∫ tan x dx", "content": "$$\\int \\tan x\\,dx=-\\ln|\\cos x|+C$$", "tags": ["三角函数"]},
+    {"title": "∫ cot x dx", "content": "$$\\int \\cot x\\,dx=\\ln|\\sin x|+C$$", "tags": ["三角函数"]},
+    {"title": "∫ sec x dx", "content": "$$\\int \\sec x\\,dx=\\ln|\\sec x+\\tan x|+C$$", "tags": ["三角函数"]},
+    {"title": "∫ csc x dx", "content": "$$\\int \\csc x\\,dx=\\ln|\\csc x-\\cot x|+C$$", "tags": ["三角函数"]},
+    {"title": "∫ sec²x dx", "content": "$$\\int \\sec^2 x\\,dx=\\tan x+C$$", "tags": ["三角函数"]},
+    {"title": "∫ csc²x dx", "content": "$$\\int \\csc^2 x\\,dx=-\\cot x+C$$", "tags": ["三角函数"]},
+    {"title": "∫ sec x tan x dx", "content": "$$\\int \\sec x\\tan x\\,dx=\\sec x+C$$", "tags": ["三角函数"]},
+    {"title": "∫ csc x cot x dx", "content": "$$\\int \\csc x\\cot x\\,dx=-\\csc x+C$$", "tags": ["三角函数"]},
+    {"title": "∫ tan²x dx", "content": "$$\\int \\tan^2 x\\,dx=\\tan x-x+C$$", "tags": ["三角函数"]},
+    {"title": "∫ cot²x dx", "content": "$$\\int \\cot^2 x\\,dx=-\\cot x-x+C$$", "tags": ["三角函数"]},
+    {"title": "∫ dx/(a+x²)", "content": "$$\\int \\frac{dx}{a+x^2}=\\frac{1}{\\sqrt{a}}\\arctan\\frac{x}{\\sqrt{a}}+C$$\n\n适用条件：$a>0$。", "tags": ["代数 / 反三角"]},
+    {"title": "∫ dx/√(a²−x²)", "content": "$$\\int \\frac{dx}{\\sqrt{a^2-x^2}}=\\arcsin\\frac{x}{a}+C$$\n\n通常取 $a>0$。", "tags": ["根式"]},
+    {"title": "∫ dx/√(x²+a²)", "content": "$$\\int \\frac{dx}{\\sqrt{x^2+a^2}}=\\ln\\left|x+\\sqrt{x^2+a^2}\\right|+C$$", "tags": ["根式"]},
+    {"title": "∫ dx/√(x²−a²)", "content": "$$\\int \\frac{dx}{\\sqrt{x^2-a^2}}=\\ln\\left|x+\\sqrt{x^2-a^2}\\right|+C$$\n\n通常取 $a>0$。", "tags": ["根式"]},
+    {"title": "∫ dx/(x²−a²)", "content": "$$\\int \\frac{dx}{x^2-a^2}=\\frac{1}{2a}\\ln\\left|\\frac{x-a}{x+a}\\right|+C$$\n\n通常取 $a>0$。", "tags": ["代数 / 对数"]},
+    {"title": "∫ √(a²−x²) dx", "content": "$$\\int \\sqrt{a^2-x^2}\\,dx=\\frac{1}{2}\\left[x\\sqrt{a^2-x^2}+a^2\\arcsin\\frac{x}{a}\\right]+C$$\n\n通常取 $a>0$。", "tags": ["根式"]}
+  ]
+}

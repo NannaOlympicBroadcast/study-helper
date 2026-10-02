@@ -81,3 +81,15 @@ test('focus controller flow', () => {
   f.tick();
   assert.strictEqual(f.mode, 'idle');
 });
+
+test('netlify-derived builtin modules are present and render', () => {
+  const katex = require('katex');
+  const mods = builtinModules();
+  for (const id of ['builtin_probability', 'builtin_integrals', 'builtin_taylor']) {
+    const m = mods.find((x) => x.id === id);
+    assert.ok(m && m.entries.length > 0, id);
+    for (const e of m.entries) {
+      for (const mm of e.content.matchAll(/\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$/g)) katex.renderToString(mm[1] || mm[2], { throwOnError: true });
+    }
+  }
+});

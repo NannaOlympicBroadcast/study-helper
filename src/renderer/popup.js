@@ -15,6 +15,11 @@ function show({ item, durationSec }) {
   $('#p-title').textContent = item.entry.title;
   $('#p-title').title = item.entry.title;
   $('#p-body').innerHTML = renderMarkdown(item.entry.content || '');
+  // Shrink display formulas that are wider than the card instead of scrolling.
+  for (const el of document.querySelectorAll('#p-body .math-block')) {
+    const ratio = el.clientWidth / el.scrollWidth;
+    if (ratio < 1) el.style.fontSize = `${Math.max(0.55, ratio * 0.98)}em`;
+  }
   reportSize();
   clearTimeout(hideTimer);
   const bar = $('#p-bar');

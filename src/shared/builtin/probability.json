@@ -1,0 +1,213 @@
+{
+  "id": "builtin_probability",
+  "name": "概率统计",
+  "description": "概率论与数理统计公式与知识点（来自 prob-dist-cheatsheet.netlify.app）",
+  "source": "https://prob-dist-cheatsheet.netlify.app",
+  "entries": [
+    {
+      "title": "期望与方差公式",
+      "content": "**期望（离散）** $E(X)=\\sum x\\,p(x)$\n\n**方差** $D(X)=E(X^2)-[E(X)]^2$",
+      "tags": ["总览"]
+    },
+    {
+      "title": "0-1 分布",
+      "content": "**记号** $X\\sim B(1,p)$\n\n**分布律** $P(X=k)=p^{k}(1-p)^{1-k}$，$k=0,1$\n\n**期望** $E(X)=p$ · **方差** $D(X)=p(1-p)$",
+      "tags": ["常见分布", "离散"]
+    },
+    {
+      "title": "二项分布",
+      "content": "**记号** $X\\sim B(n,p)$\n\n**分布律** $P(X=k)=\\dbinom{n}{k}p^{k}(1-p)^{n-k}$，$k=0,1,\\dots,n$\n\n**期望** $E(X)=np$ · **方差** $D(X)=np(1-p)$",
+      "tags": ["常见分布", "离散"]
+    },
+    {
+      "title": "泊松分布",
+      "content": "**记号** $X\\sim P(\\lambda)$\n\n**分布律** $P(X=k)=\\dfrac{\\lambda^{k}e^{-\\lambda}}{k!}$，$k=0,1,2,\\dots$\n\n**期望** $E(X)=\\lambda$ · **方差** $D(X)=\\lambda$",
+      "tags": ["常见分布", "离散"]
+    },
+    {
+      "title": "几何分布",
+      "content": "**记号** $X\\sim \\mathrm{Geo}(p)$\n\n**分布律** $P(X=k)=(1-p)^{k-1}p$，$k=1,2,3,\\dots$\n\n**期望** $E(X)=\\dfrac{1}{p}$ · **方差** $D(X)=\\dfrac{1-p}{p^{2}}$",
+      "tags": ["常见分布", "离散"]
+    },
+    {
+      "title": "正态分布",
+      "content": "**记号** $X\\sim N(\\mu,\\sigma^2)$\n\n**概率密度** $f(x)=\\dfrac{1}{\\sigma\\sqrt{2\\pi}}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$，$x\\in(-\\infty,+\\infty)$\n\n**期望** $E(X)=\\mu$ · **方差** $D(X)=\\sigma^{2}$",
+      "tags": ["常见分布", "连续"]
+    },
+    {
+      "title": "均匀分布",
+      "content": "**记号** $X\\sim U(a,b)$\n\n**概率密度** $f(x)=\\dfrac{1}{b-a}$，$a<x<b$\n\n**期望** $E(X)=\\dfrac{a+b}{2}$ · **方差** $D(X)=\\dfrac{(b-a)^{2}}{12}$",
+      "tags": ["常见分布", "连续"]
+    },
+    {
+      "title": "指数分布",
+      "content": "**记号** $X\\sim \\mathrm{Exp}(\\lambda)$\n\n**概率密度** $f(x)=\\lambda e^{-\\lambda x}$，$x\\ge 0$\n\n**期望** $E(X)=\\dfrac{1}{\\lambda}$ · **方差** $D(X)=\\dfrac{1}{\\lambda^{2}}$",
+      "tags": ["常见分布", "连续"]
+    },
+    {
+      "title": "卡方分布",
+      "content": "**定义** 设 $Z_1,Z_2,\\dots,Z_n$ 独立同分布于 $N(0,1)$，则\n\n$$\\chi^2=Z_1^2+Z_2^2+\\cdots+Z_n^2\\sim\\chi^2(n)$$\n\n**参数** 自由度 $n$（正整数）\n\n**期望** $E(\\chi^2)=n$ · **方差** $D(\\chi^2)=2n$\n\n**取值范围** $[0,+\\infty)$",
+      "tags": ["三大抽样分布"]
+    },
+    {
+      "title": "t 分布",
+      "content": "**定义** 设 $Z\\sim N(0,1)$，$\\chi^2_n\\sim\\chi^2(n)$，且两者独立，则\n\n$$T=\\dfrac{Z}{\\sqrt{\\chi^2_n/n}}\\sim t(n)$$\n\n**参数** 自由度 $n$\n\n**形态** 对称、比 $N(0,1)$ 尾部更厚\n\n**极限** $n\\to\\infty$ 时趋于 $N(0,1)$\n\n**取值范围** $(-\\infty,+\\infty)$",
+      "tags": ["三大抽样分布"]
+    },
+    {
+      "title": "F 分布",
+      "content": "**定义** 设 $\\chi^2_{n_1}\\sim\\chi^2(n_1)$，$\\chi^2_{n_2}\\sim\\chi^2(n_2)$，且两者独立，则\n\n$$F=\\dfrac{\\chi^2_{n_1}/n_1}{\\chi^2_{n_2}/n_2}\\sim F(n_1,n_2)$$\n\n**参数** $n_1$（分子自由度）、$n_2$（分母自由度）\n\n**形态** 右偏，仅取非负值\n\n**性质** 若 $X\\sim t(n)$，则 $X^2\\sim F(1,n)$\n\n**取值范围** $[0,+\\infty)$",
+      "tags": ["三大抽样分布"]
+    },
+    {
+      "title": "三大抽样分布关系速记",
+      "content": "- 卡方分布 = $n$ 个独立标准正态变量平方和\n- t 分布 = 标准正态 ÷ 卡方标准化后的平方根\n- F 分布 = 两个各自标准化的独立卡方之比",
+      "tags": ["三大抽样分布"]
+    },
+    {
+      "title": "切比雪夫大数定律",
+      "content": "**条件** $X_1,X_2,\\dots$ 相互独立，$E(X_i)=\\mu_i$，且方差一致有界：$D(X_i)\\le C$（$i=1,2,\\dots$）\n\n**结论** 对任意 $\\varepsilon>0$：\n\n$$\\lim_{n\\to\\infty}P\\left(\\left|\\frac{1}{n}\\sum_{i=1}^{n}X_i-\\frac{1}{n}\\sum_{i=1}^{n}\\mu_i\\right|<\\varepsilon\\right)=1$$",
+      "tags": ["大数定律与中心极限定理"]
+    },
+    {
+      "title": "伯努利大数定律",
+      "content": "**条件** $n_A$ 为 $n$ 次独立重复试验中事件 $A$ 发生的次数，$P(A)=p$\n\n**结论** 对任意 $\\varepsilon>0$：\n\n$$\\lim_{n\\to\\infty}P\\left(\\left|\\frac{n_A}{n}-p\\right|<\\varepsilon\\right)=1$$\n\n**注** 即频率依概率收敛于概率，是切比雪夫大数定律在 0-1 分布下的特例。",
+      "tags": ["大数定律与中心极限定理"]
+    },
+    {
+      "title": "辛钦大数定律",
+      "content": "**条件** $X_1,X_2,\\dots$ 独立同分布，且 $E(X_i)=\\mu$ 存在（不要求方差存在）\n\n**结论** 对任意 $\\varepsilon>0$：\n\n$$\\lim_{n\\to\\infty}P\\left(\\left|\\frac{1}{n}\\sum_{i=1}^{n}X_i-\\mu\\right|<\\varepsilon\\right)=1$$\n\n**注** 样本均值依概率收敛于总体期望，是“用样本均值估计总体均值”的理论依据。",
+      "tags": ["大数定律与中心极限定理"]
+    },
+    {
+      "title": "列维-林德伯格定理",
+      "content": "**条件** $X_1,X_2,\\dots$ 独立同分布，$E(X_i)=\\mu$，$D(X_i)=\\sigma^2>0$\n\n**结论** 当 $n$ 充分大时，近似地有\n\n$$\\frac{\\sum_{i=1}^{n}X_i-n\\mu}{\\sqrt{n}\\,\\sigma}\\ \\dot\\sim\\ N(0,1)$$\n\n**注** 不论 $X_i$ 本身服从什么分布，只要独立同分布且方差有限，标准化后的和都近似正态。",
+      "tags": ["大数定律与中心极限定理"]
+    },
+    {
+      "title": "棣莫弗-拉普拉斯定理",
+      "content": "**条件** $Y_n\\sim B(n,p)$（$n$ 重伯努利试验中的成功次数）\n\n**结论** 当 $n$ 充分大时，近似地有\n\n$$\\frac{Y_n-np}{\\sqrt{np(1-p)}}\\ \\dot\\sim\\ N(0,1)$$\n\n**注** 是列维-林德伯格定理在 0-1 分布下的特例，也是二项分布正态近似的理论依据，历史上早于一般中心极限定理提出。",
+      "tags": ["大数定律与中心极限定理"]
+    },
+    {
+      "title": "样本均值与总体均值",
+      "content": "**公式** $\\bar{X}=\\dfrac{1}{n}\\displaystyle\\sum_{i=1}^{n}X_i$\n\n**说明** $\\bar{X}$ 是 $\\mu$ 的点估计（统计量）\n\n*前提：$X_1,\\dots,X_n$ 为来自总体 $X$ 的简单随机样本，$E(X)=\\mu$，$D(X)=\\sigma^2$*",
+      "tags": ["样本与总体"]
+    },
+    {
+      "title": "样本方差与总体方差",
+      "content": "**公式** $S^2=\\dfrac{1}{n-1}\\displaystyle\\sum_{i=1}^{n}(X_i-\\bar{X})^2$\n\n**说明** 分母取 $n-1$（而非 $n$）以保证无偏性\n\n*前提：$X_1,\\dots,X_n$ 为来自总体 $X$ 的简单随机样本，$E(X)=\\mu$，$D(X)=\\sigma^2$*",
+      "tags": ["样本与总体"]
+    },
+    {
+      "title": "样本均值的期望与总体期望",
+      "content": "**公式** $E(\\bar{X})=\\mu$\n\n**说明** 样本均值是总体期望的无偏估计\n\n*前提：$X_1,\\dots,X_n$ 为来自总体 $X$ 的简单随机样本，$E(X)=\\mu$，$D(X)=\\sigma^2$*",
+      "tags": ["样本与总体"]
+    },
+    {
+      "title": "样本均值的方差与总体方差",
+      "content": "**公式** $D(\\bar{X})=\\dfrac{\\sigma^2}{n}$\n\n**说明** $n$ 越大，样本均值的波动越小\n\n*前提：$X_1,\\dots,X_n$ 为来自总体 $X$ 的简单随机样本，$E(X)=\\mu$，$D(X)=\\sigma^2$*",
+      "tags": ["样本与总体"]
+    },
+    {
+      "title": "样本方差的期望与总体方差",
+      "content": "**公式** $E(S^2)=\\sigma^2$\n\n**说明** 样本方差（分母 $n-1$）是总体方差的无偏估计\n\n*前提：$X_1,\\dots,X_n$ 为来自总体 $X$ 的简单随机样本，$E(X)=\\mu$，$D(X)=\\sigma^2$*",
+      "tags": ["样本与总体"]
+    },
+    {
+      "title": "正态总体：样本均值的分布",
+      "content": "**结论** $\\bar{X}\\sim N\\!\\left(\\mu,\\dfrac{\\sigma^2}{n}\\right)$\n\n**依据** 正态分布的可加性：$\\bar{X}$ 是 $n$ 个独立正态变量的线性组合\n\n*前提：$X_1,\\dots,X_n$ 独立同分布于 $N(\\mu,\\sigma^2)$*",
+      "tags": ["正态总体下的抽样分布定理"]
+    },
+    {
+      "title": "正态总体：标准化平方和的分布",
+      "content": "**结论** $\\dfrac{1}{\\sigma^2}\\displaystyle\\sum_{i=1}^{n}(X_i-\\mu)^2\\sim\\chi^2(n)$\n\n**依据** $n$ 个独立标准正态变量 $(X_i-\\mu)/\\sigma$ 的平方和，自由度为 $n$\n\n*前提：$X_1,\\dots,X_n$ 独立同分布于 $N(\\mu,\\sigma^2)$*",
+      "tags": ["正态总体下的抽样分布定理"]
+    },
+    {
+      "title": "正态总体：样本方差标准化的分布",
+      "content": "**结论** $\\dfrac{(n-1)S^2}{\\sigma^2}\\sim\\chi^2(n-1)$\n\n**依据** 用 $\\bar{X}$ 替代未知的 $\\mu$ 损失 1 个自由度，故为 $n-1$\n\n*前提：$X_1,\\dots,X_n$ 独立同分布于 $N(\\mu,\\sigma^2)$，$S^2$ 为样本方差*",
+      "tags": ["正态总体下的抽样分布定理"]
+    },
+    {
+      "title": "正态总体：t 统计量",
+      "content": "**结论** $\\dfrac{\\sqrt{n}(\\bar{X}-\\mu)}{S}\\sim t(n-1)$\n\n**依据** 标准正态 ÷ 独立卡方标准化后平方根，即 Student 定理（$\\sigma$ 未知时用 $S$ 替代）\n\n*前提：$X_1,\\dots,X_n$ 独立同分布于 $N(\\mu,\\sigma^2)$*",
+      "tags": ["正态总体下的抽样分布定理"]
+    },
+    {
+      "title": "正态总体抽样分布推导链条",
+      "content": "- $(X_i-\\mu)/\\sigma\\sim N(0,1)$ → 平方和服从 $\\chi^2(n)$\n- $\\bar{X}$ 替代 $\\mu$ 后损失 1 个自由度 → $(n-1)S^2/\\sigma^2\\sim\\chi^2(n-1)$\n- $\\sqrt{n}(\\bar{X}-\\mu)/\\sigma\\sim N(0,1)$ 与上式独立，按 t 分布定义相除 → 得 $t(n-1)$",
+      "tags": ["正态总体下的抽样分布定理"]
+    },
+    {
+      "title": "二维正态分布：概念",
+      "content": "**记号** $(X,Y)\\sim N(\\mu_1,\\mu_2,\\sigma_1^2,\\sigma_2^2,\\rho)$，共 5 个参数\n\n**参数** $\\mu_1,\\mu_2$（两个分量的均值）、$\\sigma_1^2,\\sigma_2^2$（两个分量的方差）、$\\rho$（相关系数，$-1<\\rho<1$）\n\n**概率密度**\n\n$$f(x,y)=\\frac{1}{2\\pi\\sigma_1\\sigma_2\\sqrt{1-\\rho^2}}\\exp\\left\\{-\\frac{1}{2(1-\\rho^2)}\\left[\\frac{(x-\\mu_1)^2}{\\sigma_1^2}-2\\rho\\frac{(x-\\mu_1)(y-\\mu_2)}{\\sigma_1\\sigma_2}+\\frac{(y-\\mu_2)^2}{\\sigma_2^2}\\right]\\right\\}$$\n\n**注** 等密度线是以 $(\\mu_1,\\mu_2)$ 为中心的一族椭圆；$|\\rho|$ 越大椭圆越扁、越向对角线倾斜，$\\rho=0$ 时椭圆的轴与坐标轴平行。",
+      "tags": ["二维正态分布"]
+    },
+    {
+      "title": "二维正态：边缘分布",
+      "content": "**结论** $X\\sim N(\\mu_1,\\sigma_1^2)$，$Y\\sim N(\\mu_2,\\sigma_2^2)$\n\n**说明** 两个边缘分布都是一维正态，且与 $\\rho$ 无关",
+      "tags": ["二维正态分布"]
+    },
+    {
+      "title": "二维正态：条件分布",
+      "content": "**结论**\n\n$$Y\\mid X=x\\sim N\\!\\left(\\mu_2+\\rho\\dfrac{\\sigma_2}{\\sigma_1}(x-\\mu_1),\\ \\sigma_2^2(1-\\rho^2)\\right)$$\n\n**说明** 条件均值是 $x$ 的线性函数，条件方差为常数（$X$ 给 $Y$ 同理对称）",
+      "tags": ["二维正态分布"]
+    },
+    {
+      "title": "二维正态：独立性",
+      "content": "**结论** $X,Y$ 独立 $\\iff\\rho=0$\n\n**说明** 二维正态分布下“不相关”与“独立”等价，这是一般随机变量不具备的特殊性质",
+      "tags": ["二维正态分布"]
+    },
+    {
+      "title": "二维正态：线性组合",
+      "content": "**结论**\n\n$$aX+bY\\sim N\\!\\left(a\\mu_1+b\\mu_2,\\ a^2\\sigma_1^2+b^2\\sigma_2^2+2ab\\rho\\sigma_1\\sigma_2\\right)$$\n\n**说明** 二维正态变量的任意线性组合仍服从一维正态分布",
+      "tags": ["二维正态分布"]
+    },
+    {
+      "title": "Gamma 函数：定义",
+      "content": "阶乘从自然数到实数/复数的推广，也是卡方、Gamma 等连续分布密度中的归一化常数；起源于 1729 年欧拉对阶乘的推广（第二类欧拉积分）。\n\n**积分定义** 对 $\\operatorname{Re}(z)>0$：\n\n$$\\Gamma(z)=\\int_0^{\\infty}t^{z-1}e^{-t}\\,dt$$\n\n其余复数通过解析延拓定义\n\n**收敛性** 积分对 $x>0$ 收敛，对 $x\\le 0$ 发散\n\n**定义域** 除 $0,-1,-2,\\dots$ 外的全体复数\n\n**极点** 非正整数 $z=0,-1,-2,\\dots$",
+      "tags": ["Gamma 函数"]
+    },
+    {
+      "title": "Gamma 函数：递推与阶乘",
+      "content": "**递推公式**（分部积分可得）\n\n$$\\Gamma(z+1)=z\\,\\Gamma(z),\\qquad \\Gamma(1)=1$$\n\n**阶乘** $\\Gamma(n+1)=n!$，即 $\\Gamma(n)=(n-1)!$\n\n**例** $\\Gamma(5)=4!=24$\n\n**易错** 注意差 1：$\\Gamma(n)\\ne n!$",
+      "tags": ["Gamma 函数"]
+    },
+    {
+      "title": "Gamma 函数：重要结论",
+      "content": "**余元（反射）公式**\n\n$$\\Gamma(z)\\,\\Gamma(1-z)=\\frac{\\pi}{\\sin\\pi z}$$\n\n**特殊值** $\\Gamma(\\tfrac12)=\\sqrt{\\pi}$（即高斯积分）\n\n**最小值** 正实轴上约在 $x\\approx 1.4616$ 处\n\n**唯一性** Bohr–Mollerup：正实轴对数凸 + 递推 + $\\Gamma(1)=1$ ⇒ 唯一",
+      "tags": ["Gamma 函数"]
+    },
+    {
+      "title": "考研积分速算（Gamma）",
+      "content": "**公式** $\\displaystyle\\int_0^{\\infty}x^{n}e^{-x}\\,dx=\\Gamma(n+1)=n!$\n\n**说明** 直接由定义得到，计算指数型密度的 $E(X)$、$E(X^2)$ 时常用",
+      "tags": ["Gamma 函数"]
+    },
+    {
+      "title": "Gamma 函数负半轴延拓",
+      "content": "**适用** $x<0$ 且非整数\n\n**公式** $\\Gamma(x)=\\dfrac{\\Gamma(x+n)}{x(x+1)\\cdots(x+n-1)}$\n\n**说明** 取自然数 $n$ 使 $x+n>0$，用递推式向左延拓",
+      "tags": ["Gamma 函数"]
+    },
+    {
+      "title": "Gamma 分布",
+      "content": "**参数** 形状 $\\gamma$，速率 1（连续）\n\n**概率密度** $f(y)=\\dfrac{1}{\\Gamma(\\gamma)}\\,y^{\\gamma-1}e^{-y}$，$y\\ge 0$\n\n**说明** $\\Gamma(\\gamma)$ 是归一化常数\n\n**期望** $\\gamma$ · **方差** $\\gamma$",
+      "tags": ["Gamma 函数"]
+    },
+    {
+      "title": "卡方分布密度（Gamma 形式）",
+      "content": "**记号** $\\chi^2(n)$（连续）\n\n**概率密度** $f(x)=\\dfrac{1}{2^{n/2}\\,\\Gamma(n/2)}\\,x^{n/2-1}e^{-x/2}$，$x>0$\n\n**说明** $\\chi^2(n)$ 即形状参数 $n/2$、尺度参数 2 的 Gamma 分布",
+      "tags": ["Gamma 函数"]
+    },
+    {
+      "title": "斯特林公式",
+      "content": "**公式** $\\Gamma(x+1)\\sim\\sqrt{2\\pi x}\\left(\\dfrac{x}{e}\\right)^{x}$\n\n**说明** $x$ 很大时的近似；小 $x$ 时误差大，可先用递推式把自变量调大",
+      "tags": ["Gamma 函数"]
+    },
+    {
+      "title": "Gamma 函数速记",
+      "content": "- Γ 是“连续版阶乘”：$\\Gamma(n)=(n-1)!$，差 1 位\n- 三个必背值：$\\Gamma(1)=1$，$\\Gamma(\\tfrac12)=\\sqrt{\\pi}$，$\\Gamma(z+1)=z\\Gamma(z)$\n- 看到 $\\int_0^\\infty x^{a}e^{-x}dx$ 就想到 $\\Gamma(a+1)$；看到卡方密度里的 $\\Gamma(n/2)$ 就是归一化常数",
+      "tags": ["Gamma 函数"]
+    }
+  ]
+}
