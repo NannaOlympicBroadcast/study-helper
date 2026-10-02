@@ -21,6 +21,8 @@ const DEFAULT_CLIENT_ID = (() => {
 })();
 
 app.setAppUserModelId('io.github.nannaolympicbroadcast.studyhelper');
+// Self-test runs use their own profile so they never collide with a running instance.
+if (process.env.STUDY_HELPER_SELFTEST) app.setPath('userData', path.join(process.env.STUDY_HELPER_SELFTEST, 'profile'));
 if (!app.requestSingleInstanceLock()) {
   app.quit();
   process.exit(0);

@@ -29,6 +29,8 @@ test('urlAllowed for http and file', () => {
   assert.ok(!core.urlAllowed(outside, s).allowed);
   assert.ok(!core.urlAllowed(require('url').pathToFileURL(dir + '-evil/x').href, s).allowed);
   assert.ok(!core.urlAllowed('ftp://x.com', s).allowed);
+  assert.ok(core.urlAllowed('chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai/index.html', s).allowed);
+  assert.ok(!core.urlAllowed('chrome-extension://abcdefabcdef/x.html', s).allowed);
 });
 
 test('daily totals split across midnight', () => {

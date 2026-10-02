@@ -199,6 +199,10 @@ function urlAllowed(u, settings) {
   if (['about:', 'data:', 'blob:', 'devtools:', 'chrome-error:'].includes(url.protocol)) {
     return { allowed: true, reason: 'internal' };
   }
+  // Chromium's built-in PDF viewer runs as this extension inside a sub-frame.
+  if (url.protocol === 'chrome-extension:' && url.hostname === 'mhjfbmdgcfjbbpaeojofohoefgiehjai') {
+    return { allowed: true, reason: 'pdf-viewer' };
+  }
   if (url.protocol === 'file:') {
     const p = fileUrlToPath(u);
     if (p && pathAllowed(p, settings.allowedFolders)) return { allowed: true, reason: 'folder' };
